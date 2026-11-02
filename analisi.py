@@ -1,13 +1,16 @@
 import csv
 from datetime import datetime
 
+FILE_MISURE = "dati/aria-brescia-misure-2026.csv"
+FILE_SENSORI = "dati/aria-brescia-sensori.csv"
+
 def carica(nomefile="aria-brescia-misure-2026.csv"):
     righe_buone = []
     righe_scartate = 0
     sensori = {}
-    with open("aria-brescia-sensori.csv","r", encoding="utf-8-sig") as file:
+    with open(FILE_SENSORI,"r", encoding="utf-8-sig") as file:
         lettore = csv.DictReader(file, delimiter=",")
-        for riga in lettore:
+        for riga in lettore:    
             try:
                 idsensore = riga["idsensore"].strip()
                 sensori[idsensore] = {
@@ -73,7 +76,7 @@ def scrivi_risultati(nomefile, intestazione, tabella):
 
 
 def main():
-    dati, scartate = carica(FILE)
+    dati, scartate = carica(FILE_MISURE)
     print(f"Righe buone: {len(dati)}, scartate: {scartate}")
     print("Domanda 1:", domanda1(dati))
     print("Domanda 2:", domanda2(dati))
