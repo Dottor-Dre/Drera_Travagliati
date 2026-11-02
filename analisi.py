@@ -87,8 +87,28 @@ def domanda1(dati):
 
 
 def domanda2(dati):
-    """Risponde alla domanda 2."""
-    return None
+    valori = []
+    giorno_massimo = ""
+ 
+    for riga in dati:
+        if ("PM10" in riga["nometiposensore"]
+                and riga["nomestazione"] == "Brescia Villaggio Sereno"
+                and riga["stato"] == "VA"):
+ 
+            valore = riga["valore"]
+            valori.append(valore)
+ 
+            if valore == max(valori):
+                giorno_massimo = riga["data"].strftime("%Y-%m-%d")
+ 
+    if len(valori) == 0:
+        return None
+ 
+    minimo = min(valori)
+    massimo = max(valori)
+    media = sum(valori) / len(valori)
+ 
+    return [minimo, massimo, round(media, 2), giorno_massimo]
 
 
 def domanda3(dati):
