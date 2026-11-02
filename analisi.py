@@ -164,7 +164,7 @@ def scrivi_risultati(nomefile, intestazione, tabella):
         scrittore = csv.writer(file)
         scrittore.writerow(intestazione)  
         scrittore.writerows(tabella)    
-        pass   
+          
 
 
 def main():
