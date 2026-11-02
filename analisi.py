@@ -160,7 +160,10 @@ def domanda_nostra(dati):
 
 def scrivi_risultati(nomefile, intestazione, tabella):
     """Scrive la tabella in un CSV con csv.writer."""
-    pass
+    with open(nomefile, "w", encoding="utf-8", newline="") as file:
+        scrittore = csv.writer(file)
+        scrittore.writerow(intestazione)  # Scrive l'intestazione
+        scrittore.writerows(tabella)       # Scrive tutte le righe della tabella
 
 
 def main():
