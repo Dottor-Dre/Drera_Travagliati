@@ -163,8 +163,8 @@ def scrivi_risultati(nomefile, intestazione, tabella):
     with open(nomefile, "w", encoding="utf-8", newline="") as file:
         scrittore = csv.writer(file)
         scrittore.writerow(intestazione)  
-        scrittore.writerows(tabella)  
-        pass     
+        scrittore.writerows(tabella)    
+        pass   
 
 
 def main():
