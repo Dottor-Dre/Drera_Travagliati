@@ -154,9 +154,28 @@ def domanda3(dati):
 
 
 def domanda_nostra(dati):
-    """La domanda inventata dal gruppo."""
-    return None
+    valori = {}
 
+    for riga in dati:
+        if "PM10" in riga["nometiposensore"] and riga["stato"] == "VA":
+            comune = riga["comune"]
+
+            if comune not in valori:
+                valori[comune] = []
+
+            valori[comune].append(riga["valore"])
+
+    comune_migliore = None
+    media_massima = 0
+
+    for comune in valori:
+        media = sum(valori[comune]) / len(valori[comune])
+
+        if media > media_massima:
+            media_massima = media
+            comune_migliore = comune
+
+    return comune_migliore, round(media_massima, 2)
 
 def scrivi_risultati(nomefile, intestazione, tabella):
     """Scrive la tabella in un CSV con csv.writer."""
