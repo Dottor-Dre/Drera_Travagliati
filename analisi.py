@@ -54,8 +54,36 @@ def carica(nomefile):
     return righe_buone, righe_scartate
 
 def domanda1(dati):
-    """Risponde alla domanda 1 della scheda."""
-    return None
+    totale = len(dati)
+    valide = 0
+    mancanti = 0
+    sensori = {}
+ 
+    for riga in dati:
+        nome = riga["nomestazione"]
+        inquinante = riga["nometiposensore"]
+        codice = riga["idsensore"]
+ 
+        if codice not in sensori:
+            sensori[codice] = [nome, inquinante, 0]
+ 
+        if riga["stato"] == "VA":
+            valide += 1
+        else:
+            mancanti += 1
+            sensori[codice][2] += 1
+ 
+    massimo = 0
+    stazione = ""
+    inquinante = ""
+ 
+    for codice in sensori:
+        if sensori[codice][2] > massimo:
+            massimo = sensori[codice][2]
+            stazione = sensori[codice][0]
+            inquinante = sensori[codice][1]
+ 
+    return [totale, valide, mancanti, stazione, inquinante, massimo]
 
 
 def domanda2(dati):
