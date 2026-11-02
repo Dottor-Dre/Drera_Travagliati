@@ -112,9 +112,45 @@ def domanda2(dati):
 
 
 def domanda3(dati):
-    """Risponde alla domanda 3. Restituisce la tabella
-    che finirà in risultati.csv: una lista di righe."""
-    return []
+    stazioni = {}
+ 
+    for riga in dati:
+        if "PM10" in riga["nometiposensore"] and riga["stato"] == "VA":
+            nome = riga["nomestazione"]
+            giorno = riga["data"].date()
+ 
+            if nome not in stazioni:
+                stazioni[nome] = {}
+ 
+            if giorno not in stazioni[nome]:
+                stazioni[nome][giorno] = [0, 0]
+ 
+            stazioni[nome][giorno][0] += riga["valore"]
+            stazioni[nome][giorno][1] += 1
+ 
+    risultati = []
+ 
+    for nome in stazioni:
+        superamenti = 0
+ 
+        for giorno in stazioni[nome]:
+            media = stazioni[nome][giorno][0] / stazioni[nome][giorno][1]
+ 
+            if media > 50:
+                superamenti += 1
+ 
+        risultati.append([
+            nome,
+            superamenti,
+            "SI" if superamenti > 35 else "NO"
+        ])
+ 
+    for i in range(len(risultati)):
+        for j in range(i + 1, len(risultati)):
+            if risultati[j][1] > risultati[i][1]:
+                risultati[i], risultati[j] = risultati[j], risultati[i]
+ 
+    return risultati
 
 
 def domanda_nostra(dati):
