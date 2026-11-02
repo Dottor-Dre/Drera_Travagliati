@@ -192,8 +192,8 @@ def main():
     print("Domanda 1:", domanda1(dati))
     print("Domanda 2:", domanda2(dati))
     tabella = domanda3(dati)
-    scrivi_risultati("risultati.csv", ["colonna1", "colonna2"], tabella)
+    scrivi_risultati("risultati.csv", ["Stazione", "Giorni oltre 50", "Oltre 35 giorni"], tabella)
     print("Domanda nostra:", domanda_nostra(dati))
-
-
+ 
+ 
 main()
