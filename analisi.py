@@ -176,14 +176,7 @@ def domanda_nostra(dati):
             comune_migliore = comune
 
     return comune_migliore, round(media_massima, 2)
-
-def scrivi_risultati(nomefile, intestazione, tabella):
-    """Scrive la tabella in un CSV con csv.writer."""
-    with open(nomefile, "w", encoding="utf-8", newline="") as file:
-        scrittore = csv.writer(file)
-        scrittore.writerow(intestazione)  
-        scrittore.writerows(tabella)    
-          
+      
 
 
 def main():
@@ -191,8 +184,8 @@ def main():
     print(f"Righe buone: {len(dati)}, scartate: {scartate}")
     print("Domanda 1:", domanda1(dati))
     print("Domanda 2:", domanda2(dati))
+    print("Domanda 3", domanda3(dati) )
     tabella = domanda3(dati)
-    scrivi_risultati("risultati.csv", ["Stazione", "Giorni oltre 50", "Oltre 35 giorni"], tabella)
     print("Domanda nostra:", domanda_nostra(dati))
  
  
