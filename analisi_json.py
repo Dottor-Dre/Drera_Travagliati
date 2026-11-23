@@ -9,7 +9,7 @@ def carica(nomefile):
     righe_scartate = 0
     sensori = {}
  
-    # Caricamento dei sensori da file JSON
+    
     with open(FILE_SENSORI, "r", encoding="utf-8") as file:
         dati_sensori = json.load(file)
  
@@ -26,7 +26,7 @@ def carica(nomefile):
             except (KeyError, AttributeError):
                 continue
  
-    # Caricamento delle misure da file JSON
+    
     with open(nomefile, "r", encoding="utf-8") as file:
         dati_misure = json.load(file)
  
@@ -34,7 +34,7 @@ def carica(nomefile):
             try:
                 idsensore = str(riga["idsensore"]).strip()
                 
-                # Gestione del valore (può essere stringa con virgola o numero)
+                
                 valore_raw = riga["valore"]
                 if isinstance(valore_raw, str):
                     valore = float(valore_raw.replace(",", "."))
